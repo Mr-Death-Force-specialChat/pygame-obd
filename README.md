@@ -1,22 +1,22 @@
 # pygame-obd
 Doesn't use pygame _yet._.
 # Usage
-run the program
+Run the program<br>
 `python3 main.py`
-> [`...`]
+> [`...`]<br>
 It'll show available serial connections for obd in this list, using pyobd.<br>
 Type a path to one of these or any path you want, to start connecting.<br>
 In the case that the engine is _off_, you might need to reconnect again after turning the engine _on_.
 - _This is not filtered, rouge data will not be detected._
-> Sleep for:
+> Sleep for:<br>
 Again, it's asking for input, this time it's a delay between prints, 0 will disable it all together,<br>
  higher than 0 will set a wait time.
 - _This is not filtered, rouge data will not be detected._
-> numbers and numbers [F,M,T][E,RR,O,R]
+> numbers and numbers [F,M,T][E,RR,O,R]<br>
 This is the output, FMT specifies the format of the numbers.<br>
 While ERROR, specifies which one of these values raised an exception,<br>
  this will also set the value to -1. EG.
-- 4096 64 kph -1% [RPM,SPEED,THROT][THROTTLE,]
+- 4096 64 kph -1% [RPM,SPEED,THROT][THROTTLE,]<br>
 The _THROTTLE_, in ERROR shows that the script couldn't retreive the THROTTLE value.<br>
 The _-1%_, also does that.<br>
 The _RPM,SPEED,THROT_ shows:
