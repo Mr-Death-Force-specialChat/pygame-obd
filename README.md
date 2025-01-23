@@ -1,0 +1,36 @@
+# pygame-obd
+Doesn't use pygame _yet._.
+# Usage
+run the program
+`python3 main.py`
+> [`...`]
+It'll show available serial connections for obd in this list, using pyobd.<br>
+Type a path to one of these or any path you want, to start connecting.<br>
+In the case that the engine is _off_, you might need to reconnect again after turning the engine _on_.
+- _This is not filtered, rouge data will not be detected._
+> Sleep for:
+Again, it's asking for input, this time it's a delay between prints, 0 will disable it all together,<br>
+ higher than 0 will set a wait time.
+- _This is not filtered, rouge data will not be detected._
+> numbers and numbers [F,M,T][E,RR,O,R]
+This is the output, FMT specifies the format of the numbers.<br>
+While ERROR, specifies which one of these values raised an exception,<br>
+ this will also set the value to -1. EG.
+- 4096 64 kph -1% [RPM,SPEED,THROT][THROTTLE,]
+The _THROTTLE_, in ERROR shows that the script couldn't retreive the THROTTLE value.<br>
+The _-1%_, also does that.<br>
+The _RPM,SPEED,THROT_ shows:
+1. 1st Number (4096) is the       RPM     (int)
+2. 2nd Number (64)   is the       speed   (kph)
+3. 3rd Number (-1)   is the       THROTTLE  (%)
+- _These numbers are padded when printed_
+- _This example is an incomplete version of PAGE 0_
+### Pages
+If you press a number then enter, it'll switch to that page.<br>
+Page 0 shows RPM SPEED THROTTLE RELATIVE_THROTTLE MASS_AIRFLOW. <br>
+Page 1 is an untested raw array of DTCs.<br>
+Page 2 shows COOLANT INTAKE AMBIANT_AIR OIL temperatures.<br>
+- _Pressing an invalid page number will display nothing._
+- _This is not filtered, rouge data will not be detected._
+### Exiting
+Press CTRL-C twice.
