@@ -4,15 +4,18 @@ Doesn't use pygame _yet._.
 Run the program<br>
 `python3 main.py`
 > [`...`]<br>
+
 It'll show available serial connections for obd in this list, using pyobd.<br>
 Type a path to one of these or any path you want, to start connecting.<br>
 In the case that the engine is _off_, you might need to reconnect again after turning the engine _on_.
 - _This is not filtered, rouge data will not be detected._
 > Sleep for:<br>
+
 Again, it's asking for input, this time it's a delay between prints, 0 will disable it all together,<br>
  higher than 0 will set a wait time.
 - _This is not filtered, rouge data will not be detected._
 > numbers and numbers [F,M,T][E,RR,O,R]<br>
+
 This is the output, FMT specifies the format of the numbers.<br>
 While ERROR, specifies which one of these values raised an exception,<br>
  this will also set the value to -1. EG.
