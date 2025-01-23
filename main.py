@@ -1,14 +1,6 @@
 import obd
 import time
 import threading
-from contextlib import contextmanager,redirect_stderr
-from os import devnull
-
-@contextmanager
-def supress_stderr():
-    with open(devnull, 'w') as fnull:
-        with redirect_stderr(fnull) as err:
-            yield err
 
 ports = obd.scan_serial()
 print(ports)
