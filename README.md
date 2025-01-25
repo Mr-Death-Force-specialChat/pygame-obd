@@ -38,3 +38,25 @@ Page 16 exits the script.<br>
 - _This is not filtered, rouge data will not be detected._
 ### Exiting
 Press CTRL-C twice.
+# Using pygame
+Run the program<br>
+`python3 test.py`
+> [`...`]<br>
+
+It'll show available serial connections for obd in this list, using pyobd.<br>
+Type a path to one of these or any path you want, to start connecting.<br>
+In the case that the engine is _off_, you might need to reconnect again after turning the engine _on_.
+- _This is not filtered, rouge data will not be detected._
+> Sleep for:<br>
+
+Again, it's asking for input, this time it's a delay between prints, 0 will disable it all together,<br>
+ higher than 0 will set a wait time.
+- _This is not filtered, rouge data will not be detected._
+> window<br>
+Window showing data.<br>
+Similar format to `main.py`, First line is the FMT, second is data, third is unavailable data.<br>
+The window shows subpages 0 and 1 at once, however the original subpage 1 [DTC] is removed.<br>
+Only one page is available, being page 0, changing to a different page is simple,<br>
+ in the console write the page number, then press enter, <br>
+ only one page is available.<br>
+Exiting is as simple as pressing 16 then enter, or closing the window.<br>
