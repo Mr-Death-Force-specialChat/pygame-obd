@@ -53,6 +53,7 @@ Again, it's asking for input, this time it's a delay between prints, 0 will disa
  higher than 0 will set a wait time.
 - _This is not filtered, rouge data will not be detected._
 > window<br>
+
 Window showing data.<br>
 Similar format to `main.py`, First line is the FMT, second is data, third is unavailable data.<br>
 The window shows subpages 0 and 1 at once, however the original subpage 1 [DTC] is removed.<br>
