@@ -7,8 +7,8 @@ ports = obd.scan_serial()
 print(ports)
 conn = obd.OBD(input())
 print("Sleep for: ")
-#sleep_time = float(input())
-sleep_time = float(0.5)
+sleep_time = float(input())
+#sleep_time = float(0.5)
 obd.logger.removeHandler(obd.console_handler)
 
 #def print_data_old():
@@ -77,11 +77,13 @@ def draw_page0(screen, font, color, color2, x, y, y2, offset_per_char):
     if flags != "":
         draw_text(f"[{flags}]", font, color2, x, y2, screen)
 
-def print_data_2():
+def draw_page1(screen, font, color, color2, x, y, y2, offset_per_char):
     flags2=""
     try:
         if conn.supports(obd.commands.COOLANT_TEMP):
             coolant_temprature = conn.query(obd.commands.COOLANT_TEMP).value.magnitude
+        else:
+            raise AttributeError()
     except AttributeError:
         coolant_temprature = -1
         flags2="COOLANT,"
@@ -109,11 +111,12 @@ def print_data_2():
     except AttributeError:
         oil_temprature = -1
         flags2=flags2+"OIL,"
-    coolant_tempraturestr = format(f"{coolant_temprature:<4.1f} C")
-    intake_tempraturestr = format(f"{intake_temprature:<4.1f} C")
-    ambiant_air_tempraturestr = format(f"{ambiant_air_temprature:<4.1f} C")
-    oil_tempraturestr = format(f"{oil_temprature:<4.1f} C")
-    print(f" {coolant_tempraturestr:<12}{intake_tempraturestr:<12}{ambiant_air_tempraturestr:<12}{oil_tempraturestr:<12}[COOLANT,INTAKE,AMBIANT_AIR,OIL][{flags2}]")
+    draw_text(f"{coolant_temprature:04.1f} C", font, color, x, y, screen)
+    draw_text(f"{intake_temprature:04.1f} C", font, color, x+(offset_per_char*16), y, screen)
+    draw_text(f"{ambiant_air_temprature:04.1f} C", font, color, x+(offset_per_char*30), y, screen)
+    draw_text(f"{oil_temprature:04.1f} C", font, color, x+(offset_per_char*42), y, screen)
+    if flags2 != "":
+        draw_text(f"[{flags2}]", font, color2, x, y2, screen)
 
 pygame.init()
 screen = pygame.display.set_mode((640,420))
@@ -123,18 +126,32 @@ DATA_FONT2 = pygame.font.SysFont("Fira Code Retina", 32)
 def prerender_text(text, font, color, aa=True):
     return font.render(text, aa, color)
 
+def flag_set():
+    global flag
+    while flag != 16:
+        keystroke=input()
+        flag=int(keystroke)
+
+n=threading.Thread(target=flag_set)
+n.start()
+
 run = True
 BACKGROUND_COL=(16,16,16)
 DATA_COL=(255,180,160)
 DATA_COL2=(210,200,190)
 ERR_COL=(255, 64, 64)
 PAGE0=prerender_text("RPM  |    SPEED    |  THROTTLE  |  RELATIVE  |  AIRFLOW", DATA_FONT, DATA_COL)
+PAGE1=prerender_text("COOLANT  |  INTAKE   |    AIR     |      OIL", DATA_FONT, DATA_COL)
 while run:
     screen.fill((16,16,16))
     if flag == 0:
         screen.blit(PAGE0, (10, 10))
-        draw_page0(screen, DATA_FONT2, DATA_COL2, ERR_COL, 10, 66, 140, 9)
+        screen.blit(PAGE1, (10, 116))
+        draw_page0(screen, DATA_FONT2, DATA_COL2, ERR_COL, 10, 42, 74, 9)
+        draw_page1(screen, DATA_FONT2, DATA_COL2, ERR_COL, 10, 148, 180, 9)
         time.sleep(sleep_time)
+    elif flag == 16:
+        run = False
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
