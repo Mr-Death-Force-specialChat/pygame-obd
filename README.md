@@ -33,6 +33,7 @@ If you press a number then enter, it'll switch to that page.<br>
 Page 0 shows RPM SPEED THROTTLE RELATIVE_THROTTLE MASS_AIRFLOW. <br>
 Page 1 is an untested raw array of DTCs.<br>
 Page 2 shows COOLANT INTAKE AMBIANT_AIR OIL temperatures.<br>
+Page 16 exits the script.<br>
 - _Pressing an invalid page number will display nothing._
 - _This is not filtered, rouge data will not be detected._
 ### Exiting

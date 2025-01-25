@@ -117,10 +117,12 @@ def loop():
             print("ATTRIB_ERROR")
     elif flag == 2:
         print_data_2()
+    elif flag == 16:
+        conn.close()
 
 def flag_set():
     global flag
-    while True:
+    while flag != 16:
         keystroke=input()
         flag=int(keystroke)
 
@@ -131,6 +133,6 @@ if sleep_time == 0:
     while True:
         loop()
 else:
-    while True:
+    while flag != 16:
         loop()
         time.sleep(sleep_time)
